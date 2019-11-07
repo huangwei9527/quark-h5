@@ -1,0 +1,642 @@
+/*css初始化*/
+@import "normalize.css";
+@import "variables"; // 全局变量
+@import "../fonts/iconfont.css";
+
+html,
+body,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+th,
+td,
+dl,
+dd,
+form,
+fieldset,
+legend,
+input,
+textarea,
+select {
+  margin: 0;
+  padding: 0
+}
+
+li {
+  list-style: none
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+// box-sizing统一采用border-box
+* {
+  box-sizing: border-box;
+}
+
+/*=================================================================
+  图片
+  =================================================================*/
+
+img {
+  max-width: 100%;
+}
+
+
+/*=================================================================
+  文字相关
+  =================================================================*/
+
+.fontsize-sm {
+  font-size: 12px;
+}
+
+.fontsize-normal {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.fontsize-lg {
+  font-size: 16px;
+}
+
+.fontsize-12 {
+  font-size: 12px;
+}
+
+.fontsize-16 {
+  font-size: 16px;
+}
+
+.fontsize-14 {
+  font-size: 14px;
+}
+
+.fontsize-18 {
+  font-size: 18px;
+}
+
+.fontsize-20 {
+  font-size: 20px;
+}
+
+.fontsize-24 {
+  font-size: 24px;
+}
+
+.fontsize-28 {
+  font-size: 28px;
+}
+
+.fontsize-32 {
+  font-size: 32px;
+}
+
+.fontBold {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left
+}
+
+.text-right {
+  text-align: right
+}
+
+
+/*文字超出显示省略号*/
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/*字体相关*/
+
+.lineheight-1 {
+  line-height: 1;
+}
+
+.lineheight-16 {
+  line-height: 16px;
+}
+
+.lineheight-18 {
+  line-height: 18px;
+}
+
+.lineheight-24 {
+  line-height: 24px;
+}
+
+.lineheight-28 {
+  line-height: 28px;
+}
+
+.lineheight-36 {
+  line-height: 36px;
+}
+
+.lineheight-normal {
+  line-height: 1.4;
+}
+
+.word-wrap {
+  word-wrap: break-word
+}
+
+.page-title {
+  padding: 10px 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.user-select-none {
+  user-select: none;
+}
+
+/*=================================================================
+  color相关
+  =================================================================*/
+.primary {
+  color: $primary;
+}
+
+.color-error {
+  color: $error;
+}
+
+.red {
+  color: $error;
+}
+
+.gray {
+  color: $gray;
+}
+
+.blue {
+  color: #337ab7;
+}
+
+.orange {
+  color: #fe955e;
+}
+
+.green {
+  color: #1ab194;
+}
+
+.error {
+  color: #f5596e;
+}
+
+.white {
+  color: #fff;
+}
+
+.black {
+  color: black;
+}
+
+.success {
+  color: $success;
+}
+
+.bg-gray {
+  background: $gray;
+}
+
+.bg-yellow {
+  background-color: yellow;
+}
+
+.bg-none {
+  background: none !important;
+}
+
+.bg-none * {
+  background: none !important;
+}
+
+.bg-transparent {
+  background: transparent;
+}
+
+.link {
+  color: #337ab7;
+  cursor: pointer;
+}
+
+// 背景渐变
+.bg-color-gradient {
+  background: $color-gradient;
+}
+
+/*=================================================================
+  布局相关
+  =================================================================*/
+
+.none {
+  display: none;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.block {
+  display: block;
+}
+
+.table {
+  display: table
+}
+
+.table-cell {
+  display: table-cell
+}
+
+.vertical-align-middle {
+  vertical-align-middle: middle;
+}
+
+.hidden {
+  overflow: hidden;
+}
+
+/*清除浮动*/
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+
+
+/*左浮动，右浮动*/
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+
+/*=================================================================
+  width && height
+  =================================================================*/
+
+.width20 {
+  width: 20px;
+}
+
+.width60 {
+  width: 60px;
+}
+
+.width100 {
+  width: 100px;
+}
+
+.width120 {
+  width: 120px;
+}
+
+.width200 {
+  width: 200px;
+}
+
+.width300 {
+  width: 300px;
+}
+
+.height10 {
+  height: 10px;
+}
+
+.height20 {
+  height: 20px;
+}
+
+.height30 {
+  height: 30px;
+}
+
+.height40 {
+  height: 40px;
+}
+
+.height50 {
+  height: 50px;
+}
+
+.height60 {
+  height: 60px;
+}
+
+.height70 {
+  height: 70px;
+}
+
+.height80 {
+  height: 80px;
+}
+
+.height100 {
+  height: 100px;
+}
+
+
+/*=================================================================
+  padding margin
+  =================================================================*/
+
+@for $i from 0 through 90 {
+  @if $i % 5==0 {
+    .paddingT#{$i} {
+      padding-top: #{$i}px
+    }
+
+    .paddingL#{$i} {
+      padding-left: #{$i}px
+    }
+
+    .paddingR#{$i} {
+      padding-right: #{$i}px
+    }
+
+    .paddingB#{$i} {
+      padding-bottom: #{$i}px
+    }
+
+    .marginT#{$i} {
+      margin-top: #{$i}px
+    }
+
+    .marginL#{$i} {
+      margin-left: #{$i}px
+    }
+
+    .marginR#{$i} {
+      margin-right: #{$i}px
+    }
+
+    .marginB#{$i} {
+      margin-bottom: #{$i}px
+    }
+
+    .padding#{$i} {
+      padding: #{$i}px
+    }
+
+    .margin#{$i} {
+      margin: #{$i}px
+    }
+  }
+}
+
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/*=================================================================
+  z-engine-h5-long-100
+  =================================================================*/
+
+.z-index-10 {
+  z-index: 10;
+}
+
+.z-index-20 {
+  z-index: 20;
+}
+
+.z-index-30 {
+  z-index: 30;
+}
+
+.z-index-40 {
+  z-index: 40;
+}
+
+.z-index-50 {
+  z-index: 50;
+}
+
+.z-index-60 {
+  z-index: 60;
+}
+
+.z-index-70 {
+  z-index: 70;
+}
+
+.z-index-80 {
+  z-index: 80;
+}
+
+.z-index-100 {
+  z-index: 100;
+}
+
+
+/*=================================================================
+  border
+  =================================================================*/
+
+.border-T {
+  border-top: 1px solid $border-color;
+}
+
+.border-B {
+  border-bottom: 1px solid $border-color;
+}
+
+.border-L {
+  border-left: 1px solid $border-color;
+}
+
+.border-R {
+  border-right: 1px solid $border-color;
+}
+
+.border-dashed-T {
+  border-top: 1px dashed $border-color;
+}
+
+.border-dashed-B {
+  border-bottom: 1px dashed $border-color;
+}
+
+.border-red {
+  border: 1px solid $error !important;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.border-radius-4 {
+  border-radius: 4px;
+}
+
+.border-round {
+  border: 1px solid $border-color;
+}
+
+/*=================================================================
+  鼠标样式
+  =================================================================*/
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/*必填项 * 图标*/
+
+.required-fields:before {
+  content: ' *';
+  color: $error;
+  font-size: 20px;
+}
+
+/** 页面结构样式 */
+.page-content {
+  padding: $content-both-sides-padding;
+}
+
+.page-title-wrapper {
+  height: 58px;
+  line-height: 58px;
+  padding: 0 $content-both-sides-padding;
+  font-size: 18px;
+  color: black;
+  border-bottom: 1px solid $border-color;
+}
+
+.page-search-wrapper {
+  min-height: 48px;
+  padding: 4px $content-both-sides-padding;
+  line-height: 48px;
+
+  &::after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+  }
+
+  .search-item-label {
+    display: inline-block;
+  }
+
+  .search-item-input {
+    display: inline-block;
+    width: 200px;
+    margin-right: 10px;
+  }
+
+  .search-item-input.small {
+    display: inline-block;
+    width: 138px;
+  }
+
+  .search-item-btn {
+    display: inline-block;
+  }
+}
+
+.page-table-wrapper {
+  .link {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  .el-table--enable-row-hover .el-table__body tr:hover>td {
+    * {
+      color: $primary;
+    }
+
+    .table-btn {
+      background-color: $primary;
+    }
+  }
+}
+
+.table-btn-show-more {
+  display: inline-block;
+  width: 32px;
+  height: 24px;
+  line-height: 24px;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(161, 175, 195, 1);
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    background: $primary;
+    border-color: $primary;
+
+    i {
+      color: white !important;
+    }
+  }
+}
+
+.page-pagination-wrapper {
+  text-align: right;
+  padding: 20px 0;
+}
+
+
+// 背景渐变
+.bg-color-gradient {
+  background: $color-gradient;
+}
+.scrollbar-wrapper .el-scrollbar__wrap {
+  overflow-x: auto;
+}
+
