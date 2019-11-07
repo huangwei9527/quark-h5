@@ -7,11 +7,12 @@
 >> Koa2 + mongodb
 
 ### Demo
-(gif图比较大，加载比较慢)
 > [在线访问地址](https//47.104.247.183:4000)
 
 ### 功能演示
-(https://raw.githubusercontent.com/huangwei9527/quark/master/docs/preview-img/home.gif)
+gif图比较大，加载比较慢
+
+![预览](https://raw.githubusercontent.com/huangwei9527/quark-h5/master/docs/images/quark.gif)
 
 
 ## 安装依赖
