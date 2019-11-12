@@ -46,5 +46,6 @@ export default {
   line-height: 32px;
   text-align: center;
   margin-top: -5px;
+  border: 1px solid $gray;
 }
 </style>

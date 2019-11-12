@@ -2,8 +2,8 @@
   "port": "4000",
   "adminAccount": "admin",
   "db": {
-    "servername": "47.104.247.183",
-    "DATABASE": "admin",
+    "servername": "localhost",
+    "DATABASE": "quark",
     "port": 27017,
     "user": "admin",
     "pass": "admin",

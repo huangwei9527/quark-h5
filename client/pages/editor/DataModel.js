@@ -91,6 +91,7 @@ let getElementConfig = function (element, extendStyle = {}) {
 
 	config.value = element.defaultValue || dict[type];
 	config.valueType = type;
+	config.isForm = !!element.isForm;
 	return config;
 }
 let copyElement = function(element, extendStyle = {}){

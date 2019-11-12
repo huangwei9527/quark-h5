@@ -44,7 +44,6 @@
 </template>
 
 <script>
-	import editorProjectConfig from '../editor/DataModel'
 	import previewPage from './components/preview'
 	import notFundData from '@client/components/notFundData'
 	export default {
@@ -134,14 +133,14 @@
 
 			},
 			/**
-			 * 设为模板
+			 * 发布模板到模板市场
 			 * @param id
 			 */
-			setAsTemplate(id){
+			publishPage(id){
 				this.loading = true;
-				this.$axios.post('/page/setTemplate/' + id).then(() => {
+				this.$axios.post('/page/publish/' + id).then(() => {
 					this.loading = false;
-					this.$alert('已添加到我的模板库', '操作提示', {
+					this.$alert('已发布到模板市场', '操作提示', {
 						confirmButtonText: '确定'
 					});
 				}).catch(() => {

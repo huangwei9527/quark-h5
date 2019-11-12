@@ -11,16 +11,16 @@
 		props: {
 			text: {
 				type: String,
-        default: '这是一段文字'
-      }
+				default: '这是一段文字'
+			}
 		},
-    data(){
+		data() {
 			return {
 				defaultStyle: {
 					height: 40
 				}
-      }
-    }
+			}
+		}
 	}
 </script>
 

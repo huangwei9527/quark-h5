@@ -44,7 +44,7 @@
           </div>
         </el-form-item>
       </el-form>
-      <p class="login-page-bottom">Copyright © 2019 <span class="primary">新希望集团 版权所有</span></p>
+      <p class="login-page-bottom">Copyright © 2019 <span class="primary">Quark-h5版权所有</span></p>
     </div>
   </div>
 </template>

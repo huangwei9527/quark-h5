@@ -13,7 +13,7 @@
                   @handleElementClick="handleElementClick(item.uuid)"
                   @resize="handleElementResize"
                   :active="item.uuid === activeElementUUID">
-            <component :is="item.elName" class="element-on-edit-pane" v-bind="item.propsValue"/>
+            <component :is="item.elName" class="element-on-edit-pane" v-bind="{...item.propsValue, value: item.value}"/>
           </edit-shape>
         </div>
         <div class="page-wrapper-mask"></div>
