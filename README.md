@@ -21,6 +21,23 @@ gif图比较大，加载比较慢
 cnpm install
 ```
 
+### 修改mongodb配置
+```
+{
+  "port": "4000",
+  "adminAccount": "admin",
+  "db": {
+    "servername": "localhost",
+    "DATABASE": "admin",
+    "port": 27017,
+    "user": "admin",
+    "pass": "admin",
+    "authSource": "admin"
+  },
+  "baseURL": "http://localhost:4000"
+}
+```
+
 ### 开发
 
 ```bash
