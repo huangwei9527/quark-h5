@@ -5,8 +5,8 @@
     "servername": "localhost",
     "DATABASE": "quark",
     "port": 27017,
-    "user": "admin",
-    "pass": "admin",
+    "user": "",
+    "pass": "",
     "authSource": "admin"
   },
   "baseURL": "http://localhost:4000"

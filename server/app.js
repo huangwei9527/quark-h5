@@ -76,10 +76,11 @@ mongoConf.connect();
 
 
 //配置路由
-fs.readdirSync('./routes').forEach(route=> {
+fs.readdirSync(path.join(__dirname,'./routes')).forEach(route=> {
 	let api = require(`./routes/${route}`)
 	router.use(`/${route.replace('.js', '')}`, api.routes())
 })
+
 
 app.use(formatresponse);
 
@@ -87,5 +88,6 @@ app.use(router.routes());   /*启动路由*/
 app.use(router.allowedMethods());
 
 
+
 //启动服务
-app.listen(4000);
+app.listen(5000);

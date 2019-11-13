@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev-client": "vue-cli-service serve",
-    "dev-server": "nodemon server/app.js dev -L",
+    "dev-server": "node server/app.js",
     "dev": "npm run dev-client & npm run dev-server",
     "build-client": "vue-cli-service build",
     "prd": "pm2 start server/bin/www",
