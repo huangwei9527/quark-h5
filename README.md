@@ -118,6 +118,5 @@ npm run lib:h5-swiper
 2. 后端：[Koa](https://strapi.io/)
 3. 存储：[mongodb](https://mongodb.com)
 
-## 开源协议
-
-本项目依据MIT开源协议发布，允许任何组织和个人免费使用。
+### License
+Apache License 2.0
