@@ -14,13 +14,13 @@ const uploadImage = require('../utils/uploadImg')
 router.post('/psdPpload',async ctx=>{
 	const file = ctx.request.files.file; // 获取上传文件
 	let psd = await PSD.open(file.path)
-	var timeStr = + new Date();
+	let timeStr = + new Date();
 	let descendantsList = psd.tree().descendants();
 	descendantsList.reverse();
 	let psdSourceList = []
 	let currentPathDir = `public/upload_static/psd_image/${timeStr}`
 	fs.existsSync(path.join(ctx.state.SERVER_PATH, currentPathDir)) || fs.mkdirSync(path.join(ctx.state.SERVER_PATH, currentPathDir))
-	for (var i = 0; i < descendantsList.length; i++){
+	for (let i = 0; i < descendantsList.length; i++){
 		if (descendantsList[i].isGroup()) continue;
 		if (!descendantsList[i].visible) continue;
 		try{
