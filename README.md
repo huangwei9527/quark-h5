@@ -118,5 +118,8 @@ npm run lib:h5-swiper
 2. 后端：[Koa](https://strapi.io/)
 3. 存储：[mongodb](https://mongodb.com)
 
+## 交流群
+![QQ群聊](http://chuantu.xyz/t6/703/1574060179x992245975.png)
+
 ### License
 Apache License 2.0
