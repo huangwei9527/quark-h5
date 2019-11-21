@@ -11,8 +11,10 @@ const options = {
 // password 数据库密码
 // localhost 数据库ip
 // dbname 数据库名称
-const url = `mongodb://${config.db.user}:${config.db.pass}@${config.db.servername}:${config.db.port}/${config.db.DATABASE}`
-
+let url = `mongodb://${config.db.user}:${config.db.pass}@${config.db.servername}:${config.db.port}/${config.db.DATABASE}`
+if (config.db.authSource) {
+  url = url + `?authSource=${config.db.authSource}`;
+}
 module.exports = {
 	connect: ()=> {
 		mongoose.connect(url,options)
