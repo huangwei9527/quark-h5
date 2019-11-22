@@ -1,7 +1,7 @@
 <!--test.vue-->
 <template>
   <div class="qk-input">
-    <input class="qk-input-item" :placeholder="placeholder" type="text">
+    <input class="qk-input-item" v-model="value" :placeholder="placeholder" type="text">
   </div>
 </template>
 

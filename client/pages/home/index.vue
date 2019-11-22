@@ -19,7 +19,6 @@
           <span slot="title">创意模板</span>
         </el-menu-item>
       </el-menu>
-
     </div>
     <div class="clearfix my-page-list">
       <router-view class="sub-page"/>
@@ -49,7 +48,6 @@
     }
     .my-page-list{
       flex: 1;
-      padding: 20px 30px;
       height: 100%;
       .sub-page{
         height: 100%;

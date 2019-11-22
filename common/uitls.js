@@ -2,7 +2,7 @@
  * 生成uuid方法
  * @returns {string}
  */
-export const createUUID = function (){
+export const createUUID = function () {
 	var d = new Date().getTime();
 	if (window.performance && typeof window.performance.now === "function") {
 		d += performance.now(); //use high-precision timer if available
@@ -20,7 +20,7 @@ export const createUUID = function (){
  * @param {*} obj 拷贝对象(object or array)
  * @param {*} cache 缓存数组
  */
-export const deepClone = function  (obj, cache = []) {
+export const deepClone = function (obj, cache = []) {
 	// typeof [] => 'object'
 	// typeof {} => 'object'
 	if (obj === null || typeof obj !== 'object') {
@@ -38,7 +38,7 @@ export const deepClone = function  (obj, cache = []) {
 		return hit.copy
 	}
 
-	const copy = Array.isArray(obj) ?  [] :   {}
+	const copy = Array.isArray(obj) ? [] : {}
 	// 将copy首先放入cache, 因为我们需要在递归deepCopy的时候引用它
 	cache.push({
 		original: obj,
@@ -50,3 +50,4 @@ export const deepClone = function  (obj, cache = []) {
 
 	return copy
 }
+

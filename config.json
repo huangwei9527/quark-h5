@@ -3,7 +3,7 @@
   "adminAccount": "admin",
   "db": {
     "servername": "localhost",
-    "DATABASE": "quark",
+    "DATABASE": "admin",
     "port": 27017,
     "user": "",
     "pass": "",

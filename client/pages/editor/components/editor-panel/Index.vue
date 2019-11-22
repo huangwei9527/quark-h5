@@ -16,8 +16,9 @@
             <component :is="item.elName" class="element-on-edit-pane" v-bind="{...item.propsValue, value: item.value}"/>
           </edit-shape>
         </div>
-        <div class="page-wrapper-mask"></div>
-        <div class="page-wrapper-menu-operation menu-item-on-edit-panel" :class="{active: activeElementUUID}">
+
+
+        <div class="page-wrapper-menu-operation menu-item-on-edit-panel"  :style="{transform: 'scale('+(1/scale)+')'}" :class="{active: activeElementUUID}">
           <el-tooltip v-for="(item, index) in menuOptions" :key="index" effect="dark" :content="item.title"
                       placement="right">
             <div class="menu-item menu-item-on-edit-panel" @click="handleElementCommand(item.value)">
@@ -25,6 +26,7 @@
             </div>
           </el-tooltip>
         </div>
+        <div class="page-wrapper-mask"></div>
       </div>
     </div>
   </div>
@@ -226,7 +228,7 @@
   .page-wrapper-menu-operation {
     position: absolute;
     right: -80px;
-    top: 0;
+    top: 5%;
     width: 0;
     background: white;
     color: #333;
@@ -236,6 +238,7 @@
     display: none;
     transition: all 0.28s;
     opacity: 0;
+    transform-origin: center top;
     .menu-item {
       padding: 10px;
       cursor: pointer;

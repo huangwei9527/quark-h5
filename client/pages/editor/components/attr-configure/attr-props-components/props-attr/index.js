@@ -4,6 +4,7 @@ import imageSrcList from './imageSrcList'
 import Url from './url'
 import musicSrc from './musicSrc'
 import placeholder from './placeholder'
+import rows from './rows'
 
 export default {
 	[Text.name]: Text,
@@ -11,5 +12,6 @@ export default {
 	[Url.name]: Url,
 	[musicSrc.name]: musicSrc,
 	[imageSrcList.name]: imageSrcList,
-	[placeholder.name]: placeholder
+	[placeholder.name]: placeholder,
+	[rows.name]: rows
 }

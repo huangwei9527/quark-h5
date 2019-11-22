@@ -14,6 +14,25 @@
         <imageSelect :url.sync="activePage.commonStyle.backgroundImage" />
       </div>
     </div>
+
+    <div v-if="pageMode !== 'h5'">
+      <p class="page-title fontBold">页面尺寸</p>
+      <div class="attr-item-edit-wrapper">
+        <p class="attr-item-title">尺寸：</p>
+        <div class="col-2 attr-item-edit-input">
+          <el-input-number size="mini"
+                           v-model="projectData.width"
+                           controls-position="right" :min="0"/>
+          <div class="attr-item-edit-input-des">宽度</div>
+        </div>
+        <div class="col-2 attr-item-edit-input">
+          <el-input-number size="mini"
+                           v-model="projectData.height"
+                           controls-position="right" :min="0"/>
+          <div class="attr-item-edit-input-des">高度</div>
+        </div>
+      </div>
+    </div>
   </el-scrollbar>
 </template>
 
@@ -34,7 +53,8 @@
 				'currentPageIndex',
 				'activeElementIndex',
 				'activeElement',
-        'activePage'
+        'activePage',
+				'pageMode'
 			])
 		},
 	}

@@ -90,4 +90,4 @@ app.use(router.allowedMethods());
 
 
 //启动服务
-app.listen(4000);
+app.listen($config.port);

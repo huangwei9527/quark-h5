@@ -3,11 +3,13 @@
     <!--左侧导航-->
     <div class="editor-side-bar border-R">
       <el-tabs tab-position="left" v-model="activeSideBar" style="height: 100%;">
-        <el-tab-pane v-for="(item, index) in sidebarMenus" :key="index" :name="item.value">
-          <el-tooltip slot="label" class="item" effect="dark" :content="item.label" placement="right">
-            <i :class="item.elementUiIcon"></i>
-          </el-tooltip>
-        </el-tab-pane>
+        <template v-for="(item, index) in sidebarMenus">
+          <el-tab-pane :name="item.value"  :key="index" v-if="!item.pageMode || (item.pageMode && item.pageMode === pageMode)">
+            <el-tooltip slot="label" class="item" effect="dark" :content="item.label" placement="right">
+              <i :class="item.elementUiIcon"></i>
+            </el-tooltip>
+          </el-tab-pane>
+        </template>
       </el-tabs>
     </div>
     <!--组件&页面&模板-->
@@ -79,7 +81,7 @@
 	import previewPage from './components/preview'
 	import imageLibs from '@client/components/image-libs'
 
-	import {mapState} from 'vuex'
+	import {mapState, mapGetters} from 'vuex'
 	import html2canvas from 'html2canvas'
 
 	export default {
@@ -112,6 +114,7 @@
 					},
 					{
 						label: '页面管理',
+            pageMode: 'h5',
 						value: 'pageManage',
 						elementUiIcon: 'el-icon-document'
 					},
@@ -131,7 +134,10 @@
 				projectData: state => state.editor.projectData,
 				activePageUUID: state => state.editor.activePageUUID,
 				activeElementUUID: state => state.editor.activeElementUUID
-			})
+			}),
+			...mapGetters([
+				'pageMode'
+			])
 		},
 		created() {
 			this.$store.dispatch('setPrjectData')

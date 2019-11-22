@@ -8,7 +8,8 @@
     "dev": "npm run dev-client & npm run dev-server",
     "build-client": "vue-cli-service build",
     "prd": "pm2 start server/bin/www",
-    "lib:h5-swiper": "vue-cli-service build --target lib --name h5-swiper --dest server/public/engine_libs/h5-swiper engine-template/engine-h5-swiper/index.js"
+    "lib:h5-swiper": "vue-cli-service build --target lib --name page-engine --dest server/public/engine_libs/h5-swiper engine-template/engine-h5-swiper/index.js",
+    "lib:h5-long": "vue-cli-service build --target lib --name page-engine --dest server/public/engine_libs/h5-long engine-template/engine-h5-long/index.js"
   },
   "dependencies": {
     "ali-oss": "^6.1.1",

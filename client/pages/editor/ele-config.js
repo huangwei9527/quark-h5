@@ -84,31 +84,7 @@ export default [
 					paddingTop: 10,
 					paddingBottom: 10
 				}
-			},
-			{
-				elName: 'map',
-				title: '地图',
-				icon: 'iconfont iconditu',
-				valueType: '',
-				defaultStyle: {
-					width: 300,
-					height: 200,
-					paddingTop: 10,
-					paddingBottom: 10
-				}
-			},
-			{
-				elName: 'video',
-				title: '视频',
-				icon: 'iconfont iconshipin',
-				valueType: '',
-				defaultStyle: {
-					width: $config.canvasH5Width,
-					height: 300,
-					paddingTop: 10,
-					paddingBottom: 10
-				}
-			},
+			}
 		]
 	},
 	{
@@ -120,10 +96,28 @@ export default [
 				icon: 'iconfont iconwenbenkuang',
 				isForm: true,
 				defaultStyle: {
-					height: 28,
-					width: 200,
+					height: 38,
+					width: 250,
 					paddingTop: 2,
 					paddingBottom: 2,
+					paddingLeft: 10,
+					paddingRight: 10,
+					borderColor: "#999999",
+					borderStyle: 'solid',
+					borderWidth: 1,
+					borderRadius: 4
+				}
+			},
+			{
+				elName: 'qk-textarea',
+				title: '多行文本',
+				icon: 'iconfont iconwenbenkuang',
+				isForm: true,
+				defaultStyle: {
+					height: 58,
+					width: 250,
+					paddingTop: 6,
+					paddingBottom: 6,
 					paddingLeft: 10,
 					paddingRight: 10,
 					borderColor: "#999999",

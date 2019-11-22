@@ -1,11 +1,13 @@
 <template>
   <el-form-item label="占位提示文字：">
-    <el-input
-            type="textarea"
-            :rows="2"
-            placeholder="请输入占位提示文字"
-            v-model="tempText">
-    </el-input>
+    <div>
+      <el-input
+              type="textarea"
+              :rows="2"
+              placeholder="请输入占位提示文字"
+              v-model="tempText">
+      </el-input>
+    </div>
   </el-form-item>
 </template>
 
