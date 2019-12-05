@@ -33,6 +33,14 @@
 	}
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.arrt-eidt-wrapper{
+  display: flex;
+  .arrt-eidt-l{
+    width: 108px;
+  }
+  .arrt-eidt-r{
+    flex: 1;
+  }
+}
 </style>

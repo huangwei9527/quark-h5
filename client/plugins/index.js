@@ -2,25 +2,41 @@
  * 组件库入口
  * */
 
+// 基础组件
 import Text from './text'
 import Image from './image'
 import ImageCarousel from './image-carousel'
 import RectangleBorder from './rectangle-border'
 import Iframe from './iframe'
 import Button from './button'
-import bgMusic from './bg-music'
+
+// 表单组件
 import Input from './input'
+import Textarea from './textarea'
+
+// 功能组件
+import bgMusic from './bg-music'
+
+// 业务组件
+
+
+
 
 // 所有组件列表
 const components = [
+	// 基础组件
 	Text,
 	Image,
 	ImageCarousel,
 	RectangleBorder,
 	Iframe,
 	Button,
+	// 表单组件
+	Input,
+	Textarea,
+	// 功能组件
 	bgMusic,
-	Input
+	// 业务组件
 ]
 // 定义 install 方法，接收 Vue 作为参数
 const install = function (Vue) {
@@ -51,6 +67,7 @@ export {
 	Button,
 	bgMusic,
 	Input,
+	Textarea,
 	_qk_register_components_object
 }
 

@@ -1,71 +1,77 @@
 <template>
   <div class="clearfix my-page-list">
-    <div class="my-page-nav-list">
-      <div class="my-page-nav-item" @click="doSearch('my')" :class="{active: searchParams.type === 'my'}">我的作品({{myCount}})</div>
-      <div class="my-page-nav-item" @click="doSearch('share')" :class="{active: searchParams.type === 'share'}">
-        参与作品({{shareCount}})
-      </div>
+    <div class="page-search-wrapper">
+      <el-tabs v-model="searchParams.pageMode" @tab-click="handlePageModeClick">
+        <el-tab-pane :name="item.value" :disabled="item.disabled" v-for="(item, index) in pageModeList" :key="index">
+          <div slot="label"><span class="nav-tabs-label">{{item.label}}</span></div>
+        </el-tab-pane>
+      </el-tabs>
     </div>
+    <div class="page-content">
+      <div class="my-page-nav-list">
+        <div class="my-page-nav-item" @click="doSearch('my')" :class="{active: searchParams.type === 'my'}">我的作品({{myCount}})</div>
+        <div class="my-page-nav-item" @click="doSearch('share')" :class="{active: searchParams.type === 'share'}">
+          参与作品({{shareCount}})
+        </div>
+      </div>
 
-    <ul class="page-item-wrapper">
-      <li class="page-item create" @click="createNewPage">
-        <div class="temp-create">
-          <i class="el-icon-plus"></i>
-          <p class="paddingT10">创建H5</p>
-        </div>
-        <div class="null-create">
-          空白创建
-        </div>
-      </li>
-      <li class="page-item" v-for="(item, index) in pageList" :key="index">
-        <span class="unpublish" v-if="!item.isPublish">未发布</span>
-        <div class="header-mask">
-          <div class="details-btn" @click="showPreviewFn(item._id)">预览</div>
-        </div>
-        <div class="cover">
-          <img :src="item.coverImage || defaultCoverImage" alt="">
-        </div>
-        <div class="page-item-title border-T">
-          <span class="item-title-i">{{item.title}}</span>
-        </div>
-        <div class="page-item-data-pv border-T">
-          <div class="btn-wrapper">
-            <el-button type="text" size="mini" @click="editPage(item._id)">编辑</el-button>
+      <ul class="page-item-wrapper">
+        <li class="page-item create" @click="createNewPage">
+          <div class="temp-create">
+            <i class="el-icon-plus"></i>
+            <p class="paddingT10">创建{{searchParams.pageMode | getLabelText(pageModeList)}}</p>
           </div>
-          <div class="btn-wrapper">
-            <el-button type="text" size="mini" @click="copyPage(item._id)">复制</el-button>
+        </li>
+        <li class="page-item" v-for="(item, index) in pageList" :key="index">
+          <span class="unpublish" v-if="!item.isPublish">未发布</span>
+          <div class="header-mask">
+            <div class="details-btn" @click="showPreviewFn(item._id)">预览</div>
           </div>
-          <div class="btn-wrapper">
+          <div class="cover">
+            <img :src="item.coverImage || defaultCoverImage" alt="">
+          </div>
+          <div class="page-item-title border-T">
+            <span class="item-title-i">{{item.title}}</span>
+          </div>
+          <div class="page-item-data-pv border-T">
+            <div class="btn-wrapper">
+              <el-button type="text" size="mini" @click="editPage(item._id)">编辑</el-button>
+            </div>
+            <div class="btn-wrapper">
+              <el-button type="text" size="mini" @click="copyPage(item._id)">复制</el-button>
+            </div>
+            <div class="btn-wrapper">
 
-            <el-dropdown placement="top-start">
+              <el-dropdown placement="top-start">
               <span class="el-dropdown-link">
                 <el-button type="text" size="mini">更多 <i class="el-icon-more-outline"></i></el-button>
               </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-if="!item.isPublish && searchParams.type === 'my'">
-                  <div @click="publishPage(item._id, index)">发布</div>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <div @click="setAsTemplate(item._id)">复制为模板</div>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <div @click="showPageData(item._id)">页面数据</div>
-                </el-dropdown-item>
-                <el-dropdown-item v-if="searchParams.type === 'my'">
-                  <div @click="showAddUser(item._id)">添加成员</div>
-                </el-dropdown-item>
-                <el-dropdown-item v-if="searchParams.type === 'my'">
-                  <div @click="deletePage(item._id, index)">删除</div>
-                </el-dropdown-item>
-                <el-dropdown-item v-if="searchParams.type === 'share'">
-                  <div @click="deleteShareUserPage(item._id, index)">移出我的参与</div>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item v-if="!item.isPublish && searchParams.type === 'my'">
+                    <div @click="publishPage(item._id, index)">发布</div>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <div @click="setAsTemplate(item._id)">复制为模板</div>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <div @click="showPageData(item._id)">页面数据</div>
+                  </el-dropdown-item>
+                  <el-dropdown-item v-if="searchParams.type === 'my'">
+                    <div @click="showAddUser(item._id)">添加成员</div>
+                  </el-dropdown-item>
+                  <el-dropdown-item v-if="searchParams.type === 'my'">
+                    <div @click="deletePage(item._id, index)">删除</div>
+                  </el-dropdown-item>
+                  <el-dropdown-item v-if="searchParams.type === 'share'">
+                    <div @click="deleteShareUserPage(item._id, index)">移出我的参与</div>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
 
     <div class="custom-dialog">
       <el-dialog
@@ -126,12 +132,30 @@
 				dialogVisible: false,
 				addUserloading: false,
 				userDataList: [],
+				pageModeList: [{
+          value: 'h5',
+          label: 'H5',
+          disabled: false
+        }, {
+					value: 'longPage',
+					label: '长页H5',
+					disabled: false
+				}, {
+					name: 'relativePage',
+					label: '排版图文',
+					disabled: true
+				}, {
+					value: 'pc',
+					label: 'PC页面',
+					disabled: true
+				}],
 				addUserForm: {
 					id: "",
 					userIds: []
 				},
 				searchParams: {
-					type: 'my'
+					type: 'my',
+          pageMode: 'h5'
 				}
 			}
 		},
@@ -152,7 +176,7 @@
         this.getPageList()
 			},
 			getPagesCount() {
-				this.$axios.get('/page/myPages/count').then(res => {
+				this.$axios.get('/page/myPages/count', this.searchParams).then(res => {
           this.myCount =  res.body.my
           this.shareCount =  res.body.share
 				})
@@ -161,7 +185,7 @@
 			 * 获取所有页面
 			 */
 			getPageList() {
-				this.$axios.get('/page/myPages', {type: this.searchParams.type}).then(res => {
+				this.$axios.get('/page/myPages', this.searchParams).then(res => {
 					this.pageList = res.body || []
 				})
 			},
@@ -171,7 +195,7 @@
 			createNewPage() {
 				let newPageData = editorProjectConfig.getProjectConfig()
 				this.loading = true;
-				this.$axios.post('/page/add', {...newPageData, author: this.$store.state.user.userId}).then(res => {
+				this.$axios.post('/page/add', {...newPageData, pageMode: this.searchParams.pageMode, author: this.$store.state.user.userId}).then(res => {
 					this.loading = false;
 					if (res.body) {
 						this.$router.push({path: 'editor', query: {id: res.body._id}})
@@ -318,7 +342,15 @@
 				}).catch(() => {
 					this.loading = false;
 				})
-			}
+			},
+			/**
+       * 切换页面类型搜索添加
+			 * @param data
+			 */
+			handlePageModeClick(){
+				this.getPageList()
+        this.getPagesCount()
+      }
 		}
 	}
 </script>
@@ -452,11 +484,11 @@
     .temp-create {
       display: inline-block;
       width: 192px;
-      height: 204px;
+      height: 100%;
       border: 1px solid #e6ebed;
       border-radius: 3px;
       margin-bottom: 18px;
-      padding-top: 70px;
+      padding-top: 104px;
       transition: all 0.28s;
       cursor: pointer;
       &:hover {
@@ -481,5 +513,28 @@
 
   .full-input-w {
     width: 100%;
+  }
+
+
+  .nav-tabs-label{
+    display: inline-block;
+    padding: 0 16px;
+    height: 60px;
+    line-height: 60px;
+  }
+  .page-search-wrapper{
+    padding: 0;
+  }
+</style>
+<style lang="scss">
+  .my-page-list{
+    .page-search-wrapper{
+      .el-tabs__header{
+        margin: 0;
+      }
+      .el-tabs__nav-wrap{
+        padding: 0 30px;
+      }
+    }
   }
 </style>

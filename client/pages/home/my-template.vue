@@ -1,42 +1,53 @@
 <template>
   <div class="clearfix my-page-list">
-    <ul class="page-item-wrapper">
-      <li class="page-item" v-for="(item, index) in pageList" :key="index">
-        <div class="header-mask">
-          <div class="details-btn" @click="showPreviewFn(item._id)">预览</div>
-        </div>
-        <div class="cover">
-          <img :src="item.coverImage || defaultCoverImage" alt="">
-        </div>
-        <div class="page-item-title border-T">
-          <span class="item-title-i">未命名页面</span>
-        </div>
-        <div class="page-item-data-pv border-T">
-          <div class="btn-wrapper">
-            <el-button type="text" size="mini" @click="editPage(item._id)">编辑</el-button>
-          </div>
-          <div class="btn-wrapper">
-            <el-button type="text" size="mini" @click="copyPage(item._id)">使用模板</el-button>
-          </div>
-          <div class="btn-wrapper">
+    <div class="page-search-wrapper">
+      <el-tabs v-model="searchParams.pageMode" @tab-click="handlePageModeClick">
+        <el-tab-pane name="h5"><div slot="label"><span class="nav-tabs-label">H5</span></div></el-tab-pane>
+        <el-tab-pane name="longPage"><div slot="label"><span class="nav-tabs-label">长页H5</span></div></el-tab-pane>
+        <el-tab-pane name="relative"><div slot="label"><span class="nav-tabs-label">排版图文</span></div></el-tab-pane>
+        <el-tab-pane name="pc"><div slot="label"><span class="nav-tabs-label">PC页面</span></div></el-tab-pane>
+      </el-tabs>
+    </div>
+    <div class="page-content">
 
-            <el-dropdown placement="top-start">
+      <ul class="page-item-wrapper">
+        <li class="page-item" v-for="(item, index) in pageList" :key="index">
+          <div class="header-mask">
+            <div class="details-btn" @click="showPreviewFn(item._id)">预览</div>
+          </div>
+          <div class="cover">
+            <img :src="item.coverImage || defaultCoverImage" alt="">
+          </div>
+          <div class="page-item-title border-T">
+            <span class="item-title-i">未命名页面</span>
+          </div>
+          <div class="page-item-data-pv border-T">
+            <div class="btn-wrapper">
+              <el-button type="text" size="mini" @click="editPage(item._id)">编辑</el-button>
+            </div>
+            <div class="btn-wrapper">
+              <el-button type="text" size="mini" @click="copyPage(item._id)">使用模板</el-button>
+            </div>
+            <div class="btn-wrapper">
+
+              <el-dropdown placement="top-start">
               <span class="el-dropdown-link">
                 <el-button type="text" size="mini">更多 <i class="el-icon-more-outline"></i></el-button>
               </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <div @click="publishPage(item._id)">发布模板市场</div>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <div @click="deletePage(item._id, index)">删除</div>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>
+                    <div @click="publishPage(item._id)">发布模板市场</div>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <div @click="deletePage(item._id, index)">删除</div>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
     <notFundData v-if="!pageList.length" />
     <!--预览-->
     <previewPage v-if="showPreview" :pageId="previewId" @closePreview="showPreview = false"></previewPage>
@@ -57,7 +68,10 @@
 				defaultCoverImage: require('@client/common/images/quark--pagecover-image.jpg'),
 				pageList: [],
 				previewId: '',
-				showPreview: false
+				showPreview: false,
+				searchParams: {
+					pageMode: 'h5'
+				}
 			}
 		},
 		created() {
@@ -72,7 +86,7 @@
 			 * 获取所有页面
 			 */
 			getPageList() {
-				this.$axios.get('/page/myTemplate').then(res => {
+				this.$axios.get('/page/myTemplate', this.searchParams).then(res => {
 					this.pageList = res.body || []
 				})
 			},
@@ -147,6 +161,13 @@
 					this.loading = false;
 				})
 			},
+			/**
+			 * 切换页面类型搜索添加
+			 * @param data
+			 */
+			handlePageModeClick(){
+				this.getPageList()
+			}
 		}
 	}
 </script>
@@ -269,6 +290,29 @@
       &:hover {
         color: $primary;
         border-color: $primary;
+      }
+    }
+  }
+
+  .nav-tabs-label{
+    display: inline-block;
+    padding: 0 16px;
+    height: 60px;
+    line-height: 60px;
+  }
+  .page-search-wrapper{
+    padding: 0;
+  }
+</style>
+
+<style lang="scss">
+  .my-page-list{
+    .page-search-wrapper{
+      .el-tabs__header{
+        margin: 0;
+      }
+      .el-tabs__nav-wrap{
+        padding: 0 30px;
       }
     }
   }
