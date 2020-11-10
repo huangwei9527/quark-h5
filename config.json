@@ -2,12 +2,12 @@
   "port": "4000",
   "adminAccount": "admin",
   "db": {
-    "servername": "localhost",
+    "servername": "172.16.14.38",
     "DATABASE": "admin",
     "port": 27017,
     "user": "",
     "pass": "",
-    "authSource": "admin"
+    "authSource": ""
   },
-  "baseURL": "http://localhost:4000"
+  "baseURL": ""
 }

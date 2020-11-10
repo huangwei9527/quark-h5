@@ -30,7 +30,7 @@
       uploadPsd(file){
 				let params  = new FormData()
         params.append('file', file);
-				this.$axios.post('/common/psdPpload' ,params).then(res => {
+				this.$API.psdPpload(params).then(res => {
 					this.$emit('upload-success', res.body || [])
         })
       }

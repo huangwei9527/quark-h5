@@ -28,20 +28,9 @@ export default {
 		 * 表单提交
 		 * @private
 		 */
-		_event_submitForm(eventData, element, page){
+		_event_submitForm(){
 			return new Promise((resolve) => {
-				// 获取提交接口
-				let apiUrl = eventData.url;
-				// 获取页面表单数据
-				let formdata ={}
-				page.pages.forEach(data => {
-					data.elements.forEach(item => {
-						if(!item.isForm) return;
-						let key = item.propsValue.keyName || '';
-						formdata[key] = item.value;
-					})
-				})
-				console.log(formdata)
+				window.alert('表单提交，待完善...')
 				resolve()
 			})
 		}

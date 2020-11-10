@@ -533,9 +533,6 @@ const getters = {
 	},
 	canRedo(state) {
 		return state.historyCache.length > state.currentHistoryIndex + 1
-	},
-	pageMode(state){
-		return state.projectData.pageMode
 	}
 };
 

@@ -224,7 +224,9 @@ img {
 .success {
   color: $success;
 }
-
+.bg-white{
+  background-color: white;
+}
 .bg-gray {
   background: $gray;
 }
@@ -557,9 +559,9 @@ img {
 
 .page-search-wrapper {
   min-height: 48px;
-  padding: 0 $content-both-sides-padding;
+  padding: 4px $content-both-sides-padding;
   line-height: 48px;
-  background: white;
+
   &::after {
     content: ".";
     display: block;
@@ -640,3 +642,39 @@ img {
   overflow-x: auto;
 }
 
+
+/** 页面结构样式 */
+.page-content {
+  padding: $content-both-sides-padding;
+}
+.layout-container{
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+
+.scroll-wrapper{
+  ::-webkit-scrollbar-track-piece{
+    background-color:#fff;
+    -webkit-border-radius:3px
+  }
+  ::-webkit-scrollbar{
+    width:12px;height:10px
+  }
+  ::-webkit-scrollbar-thumb{
+    height:30px;
+    background-color:#999;
+    -webkit-border-radius:7px;
+    outline:2px solid #fff;
+    outline-offset:-2px;
+    border:2px solid #fff
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    height:30px;
+    background-color:#9f9f9f;
+    -webkit-border-radius:8px
+  }
+}

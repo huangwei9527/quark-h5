@@ -1,88 +1,84 @@
 <template>
   <div class="components-page-header">
-    <div class="logo-wrapper cursor-pointer" @click="$router.push('/')">
-      <img src="../common/images/logo.png" alt="">
-      <span>夸克H5</span>
-    </div>
-    <slot></slot>
-    <div class="pull-right">
-      <userHeaderBar class="marginL30"/>
+    <div class="page-header-inner" :class="{'layout-container': !fullWidth, fullWidth: fullWidth}">
+      <div class="inline-block logo-wrapper">
+        <img class="cursor-pointer" @click="goHome" src="../common/images/logo.png" alt="">
+        <span class="cursor-pointer" @click="goHome">Quark H5编辑器</span>
+        <slot name="left-slot"></slot>
+      </div>
+      <div class="header-center-wrapper">
+        <slot></slot>
+      </div>
+      <div class="user-wrapper">
+        <slot name="right-slot"></slot>
+        <userHeadBtn/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-	import userHeaderBar from './user-header-bar'
-	import { mapState } from "vuex";
-	export default {
-		name: "page-header",
-		components: {
-			userHeaderBar
-		},
-		data() {
-			return {
+	import userHeadBtn from '@/components/user-head-btn'
 
-			}
+	export default {
+		props: {
+			fullWidth: Boolean
 		},
-		computed: {
-			...mapState({
-				userData: state => state.user.userData,
-				token: state => state.user.token,
-			})
+		components: {
+			userHeadBtn
 		},
 		methods: {
-			logoutFn() {
-				this.$router.push({name: 'Login'})
-			},
-			goLogin(){
-				this.$mUtils.Cookie.set('beforeLoginUrl',encodeURIComponent(this.$route.fullPath), 1/24/60, window.location.host, window.location.pathname.substring(0, window.location.pathname.length-1)) // 保存用户进入的url
-				this.$router.push({name: 'Login'})
-      }
-    },
+			goHome() {
+				// 已登录就去工作台，
+				// 没登陆就去首页
+				if (this.$store.state.user.access_token) {
+					this.$router.push({name: 'Home'})
+				} else {
+					this.$router.push({name: 'Home'})
+				}
+			}
+		}
 	}
 </script>
 
 <style lang="scss" scoped>
   .components-page-header {
-    height: 48px;
-    line-height: 48px;
-    padding-left: 12px;
-    padding-right: 12px;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 1px 4px 0px rgba(195, 195, 195, 0.6);
+    height: 100%;
+    background: white;
+    box-shadow: 0 2px 3px 0 rgba(100, 100, 100, 0.06);
   }
 
-
-  .logo-wrapper {
-    font-size: 18px;
-    font-family: Yuanti SC;
-    color: rgba(0, 0, 0, 1);
-    line-height: 44px;
-    display: inline-block;
-    img {
-      position: relative;
-      top: 6px;
-      width: 26px;
-      height: 28px;
-      display: inline-block;
-      margin-right: 8px;
+  .page-header-inner {
+    display: flex;
+    &.fullWidth {
+      padding: 0 18px;
     }
   }
 
-  .el-dropdown-link{
-    color: white;
+  .logo-wrapper {
+    width: 360px;
+    font-size: 18px;
+    line-height: 48px;
+    img {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      vertical-align: middle;
+    }
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
-  .user-header-image {
-    display: inline-block;
-    vertical-align: middle;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 4px;
-    font-size: 32px;
-    line-height: 32px;
+
+  .header-center-wrapper {
+    flex: 1;
     text-align: center;
-    margin-top: -5px;
+  }
+
+  .user-wrapper {
+    width: 360px;
+    text-align: right;
+    padding-top: 6px;
   }
 </style>

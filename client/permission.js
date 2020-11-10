@@ -4,21 +4,23 @@
 import router from '@/router'
 import NProgress from 'nprogress' // 进度条
 import 'nprogress/nprogress.css' // 进度条样式
-import * as mUtils from '@client/common/js/mUtils'
-import store from '@client/store'
+import userModel from '@/libs/userModel'
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 	NProgress.start()
-	let userData = store.state.user;
-	if (!userData.token && !to.meta.noNeedLogin) {
-		mUtils.Cookie.set('beforeLoginUrl',encodeURIComponent(to.fullPath), 1/24/60, window.location.host, window.location.pathname.substring(0, window.location.pathname.length-1)) // 保存用户进入的url
-		// 跳转到登录
-		next({
-			path: '/login',
-			query: to.query
-		});
-		return false
+	// 检测是否需要用户登录验证
+	if(to.meta.noNeedLogin){
+		next()
+		return;
 	}
+	// 用户登录状态拦截
+	let loginStatus = await userModel.checkLoginState();
+	if (!loginStatus) {
+		userModel.goLogin();
+		return false;
+	}
+
+	//TODO 黄维 根据加载的资源，更新路由meta属性中的title属性，所有的页面title使用route.meta.title
 	next()
 })
 

@@ -52,7 +52,7 @@
 			return {
 				loading: false,
 				dialogVisible: false,
-				defaultCoverImage: require('@client/common/images/quark--pagecover-image.jpg'),
+				defaultCoverImage: require('@client/common/images/quark--pagecover-image.png'),
 				option: {
 					img: '',
 					outputSize: 1, //剪切后的图片质量（0.1-1）

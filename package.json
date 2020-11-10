@@ -4,12 +4,11 @@
   "private": true,
   "scripts": {
     "dev-client": "vue-cli-service serve",
-    "dev-server": "node server/app.js",
-    "dev": "npm run dev-client & npm run dev-server",
+    "dev-server": "nodemon server/app.js dev -L",
+    "dev": "npm run dev-client",
     "build-client": "vue-cli-service build",
-    "prd": "pm2 start server/bin/www",
-    "lib:h5-swiper": "vue-cli-service build --target lib --name page-engine --dest server/public/engine_libs/h5-swiper engine-template/engine-h5-swiper/index.js",
-    "lib:h5-long": "vue-cli-service build --target lib --name page-engine --dest server/public/engine_libs/h5-long engine-template/engine-h5-long/index.js"
+    "start": "pm2 start server/app.js",
+    "lib:h5-swiper": "vue-cli-service build --target lib --name h5-swiper --dest server/public/engine_libs/h5-swiper engine-template/engine-h5-swiper/index.js"
   },
   "dependencies": {
     "ali-oss": "^6.1.1",
@@ -24,8 +23,10 @@
     "koa-body": "^4.1.1",
     "koa-ejs": "^4.2.0",
     "lodash": "^4.17.15",
+    "node-schedule": "^1.3.2",
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.6.3",
+    "redis": "^3.0.2",
     "vue": "^2.6.10",
     "vue-clipboard2": "^0.3.1",
     "vue-cropper": "^0.4.9",
@@ -43,7 +44,6 @@
     "babel-plugin-import": "^1.12.2",
     "babel-preset-env": "^1.7.0",
     "co": "^4.6.0",
-    "compression-webpack-plugin": "^3.0.0",
     "debug": "^4.1.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",

@@ -19,11 +19,11 @@
             <span slot="tip" class="el-upload__tip marginL20">只能上传jpg/png/gif文件，且不超过2M</span>
           </el-upload>
         </div>
-        <ul class="image-list-wrapper" v-if="imageList.length">
-          <li class="image-item" v-for="(item, index) in imageList" :key="index" @click="handleImageClick(item.url)">
+        <el-scrollbar class="image-list-wrapper scroll-wrapper" v-if="imageList.length">
+          <div class="image-item" v-for="(item, index) in imageList" :key="index" @click="handleImageClick(item.url)">
             <img :src="item.url" alt="">
-          </li>
-        </ul>
+          </div>
+        </el-scrollbar>
         <div class="padding60 text-center gray" v-else>暂无数据</div>
       </div>
     </div>
@@ -76,7 +76,7 @@
 				let params = new FormData()
 				params.append('file', file);
 				this.uploading = true;
-				this.$axios.post('/person/uploadImage', params).then(res => {
+				this.$API.uploadImage(params).then(res => {
 					this.uploading = false;
 					this.imageList.splice(0, 0, res.body)
 				}).catch(() => {
@@ -85,7 +85,7 @@
 			},
 			getMyImages() {
 				this.hasLoadData = true;
-				this.$axios.get('/person/images').then(res => {
+				this.$API.getMyImages().then(res => {
 					this.imageList = res.body || [];
 				})
 			},
@@ -103,18 +103,19 @@
 
 <style lang="scss" scoped>
 .image-list-wrapper{
-  display: flex;
   height: 400px;
   padding-top: 20px;
-  li{
+  .image-item{
     width: 120px;
     height: 120px;
+    float: left;
     background: #eee 50%/contain no-repeat;
     cursor: pointer;
     justify-content:center;
     align-items:center;
     display: flex;
     transition: all 0.28s;
+    margin: 5px;
     &:hover{
       box-shadow: 0 0 16px 0 rgba(0,0,0,.16);
       transform: translate3d(0,-2px,0);

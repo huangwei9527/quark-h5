@@ -1,55 +1,55 @@
 <template>
-  <div class="page-login">
-    <div class="login-logo">
-      <i class="iconfont icon-xinxiwanglogo"></i>
-    </div>
+  <div class="page page-login">
     <div class="login-page-inner">
-      <p class="title">Quark可视化系统</p>
-      <el-form :model="formData" :rules="type === '注册'?formRulesRegister:formRules" ref="loginForm" label-width="80px">
-        <el-form-item prop="email" v-if="type === '注册'" label="邮箱">
-          <el-input v-model="formData.email" @keyup.enter.native="doLogin">
-            <span slot="prefix" class="iconfont icon-zhanghao"></span>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="username" label="用户名">
-          <el-input v-model="formData.username" @keyup.enter.native="doLogin">
+      <p class="title">Quark H5</p>
+      <el-form :model="formData" :rules="formRules" ref="loginForm" label-width="0px">
+        <el-form-item prop="username">
+          <el-input v-model="formData.username" name="userName" placeholder="请输入用户名" @keyup.enter.native="doLogin">
             <i slot="prefix" class="iconfont icon-zhanghao"></i>
           </el-input>
         </el-form-item>
-        <el-form-item prop="password" label="密码">
-          <el-input v-model="formData.password" :type="inputType" @keyup.enter.native="doLogin"
+        <el-form-item prop="email" v-if="type === 'register'">
+          <el-input v-model="formData.email" autocomplete="off" placeholder="请输入邮箱" @keyup.enter.native="doLogin">
+            <span slot="prefix" class="iconfont icon-mail-copy"></span>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input v-model="formData.password" name="password" placeholder="请输入密码" :type="inputType" @keyup.enter.native="doLogin"
                     v-if="inputType==='password'">
             <i slot="prefix" class="iconfont icon-mima"></i>
             <span slot="suffix" class="cursor-pointer" @mousedown="mousedownPassword">
               <i class="iconfont icon-yincangmima"></i>
             </span>
           </el-input>
-          <el-input v-model="formData.password" :type="inputType" @keyup.enter.native="doLogin" v-else>
+          <el-input v-model="formData.password" name="password" placeholder="请输入密码" :type="inputType" @keyup.enter.native="doLogin"
+                    v-else>
             <i slot="prefix" class="iconfont icon-mima"></i>
             <span slot="suffix" class="cursor-pointer" @mousedown="mousedownText">
-              <i class="iconfont icon-yincangmima"></i>
+              <i class="iconfont icon-xianshimima"></i>
             </span>
           </el-input>
         </el-form-item>
-        <el-form-item prop="checkPassword" v-if="type === '注册'" label="确认密码">
-          <el-input v-model="formData.checkPassword" @keyup.enter.native="doLogin">
-            <span slot="prefix" class="iconfont icon-zhanghao"></span>
-          </el-input>
-        </el-form-item>
         <el-form-item>
-          <div class="btn-hover" @click="doLogin">{{type === '注册'?'注册':'登录'}}</div>
-
-          <div class="clearfix text-right paddingT10">
-            <el-button type="text" @click="switchLoginType">{{type === '注册'?'立马登录':'立马注册'}}</el-button>
-          </div>
+          <div class="btn-hover" @click="doSubmit">{{type === 'login' ? '登录' : '注册'}}</div>
         </el-form-item>
       </el-form>
-      <p class="login-page-bottom">Copyright © 2019 <span class="primary">Quark-h5版权所有</span></p>
+      <div class="switch-do-type marginB20">
+        <p class="" @click="switchType">
+          <i class="iconfont icon-iconfontzhizuobiaozhun47"></i>
+          <span>{{type === 'login' ? '立即注册' : '马上登录'}}</span>
+        </p>
+      </div>
+      <p class="login-page-bottom">Copyright © 2020 <span class="primary">Quark H5版权所有</span></p>
+    </div>
+    <div class="login-background">
+      <loginBackground />
     </div>
   </div>
 </template>
 
 <script>
+	import userModel from '@/libs/userModel'
+  import loginBackground from '@/components/login-background/index'
 	import {
 		Form,
 		FormItem,
@@ -61,37 +61,18 @@
 			[Form.name]: Form,
 			[FormItem.name]: FormItem,
 			[Input.name]: Input,
+			loginBackground
 		},
 		data() {
-			var validatePass = (rule, value, callback) => {
-				if (value === '') {
-					callback(new Error('密码不能为空'));
-				} else {
-					if (this.formData.checkPassword !== '') {
-						this.$refs.loginForm.validateField('checkPass');
-					}
-					callback();
-				}
-			};
-			var validatePass2 = (rule, value, callback) => {
-				if (value === '') {
-					callback(new Error('请再次输入密码'));
-				} else if (value !== this.formData.password) {
-					callback(new Error('两次输入密码不一致!'));
-				} else {
-					callback();
-				}
-			};
 			return {
 				loading: false,
-				type: 'login',
+				loadingVerify: false,
 				inputType: 'password',
+				type: 'login',
 				formData: {
 					email: '',
 					username: '',
-					password: '',
-					checkPassword: '',
-
+					password: ''
 				},
 				formRules: {
 					username: [
@@ -100,67 +81,57 @@
 					password: [
 						{required: true, message: '密码不能为空', trigger: 'blur'}
 					]
-				},
-				formRulesRegister: {
-					username: [
-						{required: true, message: '用户名不能为空', trigger: 'blur'}
-					],
-					password: [
-						{validator: validatePass, trigger: 'blur'}
-					],
-					checkPassword: [
-						{validator: validatePass2, trigger: 'blur'}
-					],
-					email: [
-						{required: true, message: '请输入邮箱地址', trigger: 'blur'},
-						{type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
-					]
 				}
 			}
 		},
 		created() {
 			// 进入登录页面先清空个人信息
+			this.fromUrl = this.$route.query.from ? window.decodeURIComponent(this.$route.query.from) : ''
 		},
 		methods: {
 			/**
 			 登陆
 			 */
-			doLogin() {
-				if(this.type === '注册'){
-					this.doRegister()
-          return;
-        }
+			doSubmit() {
 				// 验证成功
 				this.$refs.loginForm.validate((valid) => {
+					let fnName = this.type === 'login' ? 'doLogin' : 'doRegister'
 					if (valid) {
-						this.$axios.post('/auth/login', this.formData).then(res => {
-							this.$store.dispatch('updateUserToken', res.body.token)
-							this.$router.push('/');
-							this.getUserInfo();
-						})
+						this[fnName]();
 					} else {
-						this.$message.error('请正确填下表单!')
+						this.$store.dispatch('showMassage', {type: 'error', message: '请正确填写表单！'})
 						return false;
 					}
 				});
 			},
-			/**
-			 登陆
-			 */
-			doRegister() {
-				// 验证成功
-				this.$refs.loginForm.validate((valid) => {
-					if (valid) {
-						this.$axios.post('/auth/register', this.formData).then(res => {
-							this.$store.dispatch('updateUserToken', res.body.token)
-							this.$router.push('/');
-							this.getUserInfo();
-						})
-					} else {
-						this.$message.error('请正确填下表单!')
-						return false;
+			doLogin() {
+				let formData = {...this.formData}
+				// 登录操作
+				userModel.doLogin(formData).then(() => {
+					if(this.fromUrl){
+						this.$router.push(this.fromUrl)
+					}else{
+						userModel.goBeforeLoginUrl()
 					}
-				});
+				})
+			},
+			doRegister() {
+				let formData = {...this.formData}
+				// 登录操作
+				userModel.doRegister(formData).then(() => {
+					if(this.fromUrl){
+						this.$router.push(this.fromUrl)
+					}else{
+						userModel.goBeforeLoginUrl()
+					}
+				})
+			},
+			switchType(){
+				if(this.type === 'login'){
+					this.type = 'register'
+				}else{
+					this.type = 'login'
+				}
 			},
 			mousedownPassword() {
 				this.inputType = 'text'
@@ -171,69 +142,69 @@
 			mouseup() {
 				this.inputType = 'password'
 			},
-			/**
-			 * 获取用户信息
-			 */
-			getUserInfo() {
-				this.$axios.get('/user/info').then(res => {
-					this.$store.dispatch('updateUserInfo', res.body)
-				})
-			},
-			/**
-			 * 切换登录注册
-			 */
-			switchLoginType() {
-				this.type = this.type === '登录' ? '注册' : '登录'
-			}
 		}
 	}
 </script>
+
 <style lang="scss" scoped>
+  .page-login {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fbfbfb;
+
+  }
+
+  .login-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
   .page-login {
     height: 100%;
     width: 100%;
     padding: 1px;
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 10;
   }
 
   .login-page-inner {
     position: relative;
-    z-index: 99;
-    width: 420px;
+    z-index: 10;
+    width: 360px;
     padding: 20px 40px;
+    margin-top: -120px;
     background: white;
-    box-shadow: 0px 0px 2px rgba(58, 127, 158, 0.35);
+    box-shadow: 0px 0px 0px rgba(58, 127, 158, 0.35);
     border-radius: 4px;
+    background: white;
+    box-shadow: 1px 1px 10px 10px #dedede;
     .title {
       padding: 10px 0 30px;
       text-align: center;
       font-size: 18px;
       font-weight: bold;
-      color: rgba(65, 186, 120, 1);
+      color: $primary;
     }
     /**
     鼠标悬浮渐变
     */
     .btn-hover {
-      margin-left: auto;
-      margin-right: auto;
       margin-top: 20px;
       text-align: center;
       color: white;
-      background: linear-gradient(to right, #5ac66a 0%, #3AA27F 60%, #207b5d 100%);
+      background: $color-gradient;
       transition: all 3s;
       border-radius: 4px;
       cursor: pointer;
-    }
-    .btn-hover:hover {
-      transition: all 3s;
-      background: linear-gradient(to right, #5ac66a 0%, #3AA27F 60%, #207b5d 100%);
-    }
-    .btn-hover:active {
-      transition: all 3s;
-      background: linear-gradient(to right, #5ac66a 0%, #3AA27F 40%, #207b5d 100%);
     }
     .login-page-bottom {
       font-size: 12px;
@@ -248,17 +219,22 @@
       color: #333;
     }
   }
-
-  .login-logo {
-    z-index: 99;
-    width: 300px;
-    height: 30px;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: white;
-    .iconfont {
-      font-size: 26px;
+  .switch-do-type{
+    font-size: 14px;
+    text-underline: #000;
+    text-align: right;
+    color: #333;
+    cursor: pointer;
+    p{
+      display: inline-block;
+    }
+    i{
+      font-size: 16px;
+      font-weight: 600;
+    }
+    &:hover{
+      color: #000;
     }
   }
+
 </style>

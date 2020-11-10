@@ -20,24 +20,24 @@
       <i class="iconfont iconredo1"></i>
       <p>重做</p>
     </div>
-    <div class="button-item" @click="showPreview">
-      <i class="iconfont iconyulan"></i>
-      <p>预览</p>
-    </div>
     <UploadPsd @upload-success="uploadSuccessPsd">
       <div class="button-item">
         <i class="iconfont iconps"></i>
         <p>导入psd</p>
       </div>
     </UploadPsd>
-    <div class="button-item" @click="save">
-      <i class="iconfont iconbaocun"></i>
-      <p>保存</p>
+    <div class="button-item" @click="showPreview">
+      <i class="iconfont iconyulan"></i>
+      <p>预览保存</p>
     </div>
-    <div class="button-item" @click="publishFn">
-      <i class="iconfont iconfabu"></i>
-      <p>发布</p>
-    </div>
+    <!--<div class="button-item" @click="save">-->
+      <!--<i class="iconfont iconbaocun"></i>-->
+      <!--<p>保存</p>-->
+    <!--</div>-->
+    <!--<div class="button-item" @click="publishFn">-->
+      <!--<i class="iconfont iconfabu"></i>-->
+      <!--<p>发布</p>-->
+    <!--</div>-->
     <div class="button-item" @click="cancelFn">
       <i class="iconfont icontuichu"></i>
       <p>退出</p>
@@ -136,7 +136,7 @@
     height: 30px;
     .button-item {
       display: inline-block;
-      width: 60px;
+      width: 68px;
       cursor: pointer;
       text-align: center;
       vertical-align: bottom;

@@ -7,38 +7,42 @@ Vue.use(Router)
 export default new Router({
 	routes: [{
 		path: '/',
-		name: 'Home',
-		component: () => import('@/pages/home/index'),
-		redirect: {name: 'pageList'},
-		children: [{
-			path: 'page-list',
-			name: 'pageList',
-			component: () => import('@/pages/home/page-list'),
-		}, {
-			path: 'my-template',
-			name: 'myTemplate',
-			component: () => import('@/pages/home/my-template'),
-		}, {
-			path: 'page-data',
-			name: 'pageData',
-			component: () => import('@/pages/home/page-data'),
-		}, {
-			path: 'page-data-detail',
-			name: 'pageDataDetail',
-			component: () => import('@/pages/home/page-data-detail'),
-		}, {
-			path: 'template-list',
-			name: 'templateList',
-			component: () => import('@/pages/home/template-list'),
-		}]
-	},{
-		path: '/editor',
-		name: 'Editor',
-		component: () => import('@/pages/editor/Index')
-	},{
-		path: '/mine',
-		name: 'Mine',
-		component: () => import('@/pages/Mine')
+		name: 'Layout',
+		component: () => import('@/pages/layout'),
+		redirect: {name: 'Home'},
+		children: [
+			{
+				path: 'home',
+				name: 'Home',
+				component: () => import('@/pages/home/index'),
+				redirect: {name: 'pageList'},
+				children: [{
+					path: 'page-list',
+					name: 'pageList',
+					component: () => import('@/pages/home/page-list'),
+				}, {
+					path: 'my-template',
+					name: 'myTemplate',
+					component: () => import('@/pages/home/my-template'),
+				}, {
+					path: 'page-data',
+					name: 'pageData',
+					component: () => import('@/pages/home/page-data'),
+				}, {
+					path: 'page-data-detail',
+					name: 'pageDataDetail',
+					component: () => import('@/pages/home/page-data-detail'),
+				}, {
+					path: 'template-list',
+					name: 'templateList',
+					component: () => import('@/pages/home/template-list'),
+				}]
+			}, {
+				path: '/editor',
+				name: 'Editor',
+				component: () => import('@/pages/editor/Index')
+			},
+		],
 	},
 	{
 		path: '/login',

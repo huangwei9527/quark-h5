@@ -8,7 +8,7 @@ import * as mUtils from '@/common/js/mUtils'
 import config from '@/config'
 import filters from './filters/index'
 import AES from '@/common/js/secret'
-import userModel from '@client/mixins/userModel'
+import * as API from '@/api/index'
 
 import Element from 'element-ui'
 import '@/common/styles/element-variables.scss'
@@ -25,6 +25,8 @@ Vue.use(VueClipboard)
 Vue.prototype.$mUtils = mUtils;
 Vue.prototype.AES = AES
 Vue.prototype.$axios = httpServer;
+Vue.prototype.$api = API;
+Vue.prototype.$API = API;
 
 /**
  * 公共配置信息
@@ -36,8 +38,6 @@ Object.keys(filters).forEach(key => {
 	Vue.filter(key, filters[key])
 })
 
-// 全局注册mixins
-Vue.mixin(userModel); // 公共mixins
 
 
 // 登录后跳转方法
@@ -58,6 +58,8 @@ String.prototype.replaceAll = function(s1, s2) {
 }
 
 Vue.config.productionTip = false
+
+store.commit('UPDATE_USER_FROM_LOCAL')
 
 new Vue({
   router,

@@ -1,8 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const productionGzipExtensions = ['js', 'css']
-
 
 
 let devServer = {
@@ -36,26 +33,6 @@ module.exports = {
 			}
 		}
 	},
-	productionSourceMap: process.env.NODE_ENV !== 'production',
-	configureWebpack: config => {
-		if (process.env.NODE_ENV === 'production') {
-			// 生产环境
-			config.plugins.push(
-				new CompressionWebpackPlugin({
-					filename: '[path].gz[query]', // 提示示compression-webpack-plugin@3.0.0的话asset改为filename
-					algorithm: 'gzip',
-					test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-					threshold: 10240,
-					minRatio: 0.8
-				})
-			);
-
-		} else {
-			// 开发环境
-
-		}
-	},
-
 	// 扩展 webpack 配置
 	chainWebpack: config => {
 		// @ 默认指向 src 目录，这里要改成 examples

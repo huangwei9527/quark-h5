@@ -31,7 +31,11 @@
 		},
 		methods: {
 			async handleClick() {
-				this.$emit('handleElementClick', this.element.events, this.element)
+				for (let i = 0, len = this.element.events.length; i < len; i++) {
+					if(this['_event_' + this.element.events[i].type]){
+						await this['_event_' + this.element.events[i].type](this.element.events[i])
+          }
+				}
 			}
 		}
 	}

@@ -2,23 +2,11 @@
 切换图片，提供图片选择，图片上传等功能
 */
 <template>
-  <div class="image-select-wrapper">
-    <div class="image-select-l">
-      <div class="component-image-select" @click="handleClick">
-        <img :src="url" alt="" v-if="url">
-        <div class="image-preview-null" v-else>
-          <p><i class="el-icon-plus"></i></p>
-          <p>选择图片</p>
-        </div>
-      </div>
-    </div>
-    <div class="image-select-r">
-      <el-input
-              type="textarea"
-              :rows="4"
-              placeholder="请输入图片地址"
-              v-model="tempValue">
-      </el-input>
+  <div class="component-image-select" @click="handleClick">
+    <img :src="url" alt="" v-if="url">
+    <div class="image-preview-null" v-else>
+      <i class="el-icon-plus"></i>
+      <p>选择图片</p>
     </div>
   </div>
 </template>
@@ -33,21 +21,11 @@
 		data() {
 			return {
 				// 唯一得id用于选择图片后事件通知
-				selectId: +new Date(),
-				tempValue: ''
+				selectId: +new Date()
 			}
 		},
 		created() {
 			$bus.$on('select-image', this.changeIamge)
-			this.tempValue = this.url;
-		},
-		watch: {
-			url(val) {
-				this.tempValue = val;
-			},
-			tempValue(val) {
-				this.changeIamge(this.selectId, val);
-			}
 		},
 		methods: {
 			changeIamge(id, url) {
@@ -91,10 +69,6 @@
       max-width: 100%;
       max-height: 100%;
     }
-    p{
-      line-height: 1;
-      padding-bottom: 10px;
-    }
   }
 
   .image-preview-null {
@@ -103,17 +77,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    padding-top: 25px;
+    padding-top: 35px;
     background: rgba(0, 0, 0, 0.2);
-  }
-
-  .image-select-wrapper{
-    display: flex;
-    .image-select-l{
-      width: 108px;
-    }
-    .image-select-r{
-      flex: 1;
-    }
   }
 </style>
