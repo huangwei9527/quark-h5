@@ -75,10 +75,10 @@
 					let file = blobToFile(data)
 					let params = new FormData()
 					params.append('file', file);
-					this.$axios.post('/common/uploadFile', params).then(res => {
+					this.$API.uploadCommonImage(params).then(res => {
 						this.loading = false;
 						this.dialogVisible = false;
-						this.$emit('update:url', res.body)
+						this.$emit('update:url', res.body.url);
 					}).catch(() => {
 						this.loading = false;
           })

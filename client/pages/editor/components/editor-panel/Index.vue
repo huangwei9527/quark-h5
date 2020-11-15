@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-pane" @click="handleClickCanvas" @keyup.esc="handleKeyup">
+  <div class="editor-pane" @click="handleClickCanvas" @keyup.esc="handleKeyup" ref="editorPane">
     <div class="editor-pane-inner">
       <div class="editor-main" :style="{transform: 'scale('+scale+')', width: projectData.width + 'px', height: projectData.height + 'px'}">
         <div class="page-preview-wrapper" ref="canvas-panel" id="canvas-panel" :style="getCommonStyle(activePage.commonStyle)">
@@ -9,22 +9,26 @@
                   :key="item.uuid"
                   :uuid="item.uuid"
                   :defaultStyle="item.commonStyle"
-                  :style="getCommonStyle(item.commonStyle)"
+                  :style="getCommonStyle({width: item.commonStyle.width, height: item.commonStyle.height, left: item.commonStyle.left,top: item.commonStyle.top,position: item.commonStyle.position})"
                   @handleElementClick="handleElementClick(item.uuid)"
                   @resize="handleElementResize"
                   :active="item.uuid === activeElementUUID">
-            <component :is="item.elName" class="element-on-edit-pane" v-bind="item.propsValue"/>
+            <component :style="getCommonStyle({...item.commonStyle, top: 0, left: 0})" :is="item.elName" class="element-on-edit-pane" v-bind="item.propsValue"/>
           </edit-shape>
         </div>
         <div class="page-wrapper-mask"></div>
-        <div class="page-wrapper-menu-operation menu-item-on-edit-panel" :class="{active: activeElementUUID}">
-          <el-tooltip v-for="(item, index) in menuOptions" :key="index" effect="dark" :content="item.title"
-                      placement="right">
-            <div class="menu-item menu-item-on-edit-panel" @click="handleElementCommand(item.value)">
-              <i class="menu-item-on-edit-panel" :class="[item.icon]"></i>
-            </div>
-          </el-tooltip>
-        </div>
+      </div>
+
+      <div
+              class="page-wrapper-menu-operation menu-item-on-edit-panel"
+              :style="getMenuOptionsPositionStyle"
+              :class="{active: activeElementUUID}">
+        <el-tooltip v-for="(item, index) in menuOptions" :key="index" effect="dark" :content="item.title"
+                    placement="right">
+          <div class="menu-item menu-item-on-edit-panel" @click="handleElementCommand(item.value)">
+            <i class="menu-item-on-edit-panel" :class="[item.icon]"></i>
+          </div>
+        </el-tooltip>
       </div>
     </div>
   </div>
@@ -92,7 +96,8 @@
 					title: '图层置底',
 					icon: 'iconfont iconcontrol-bottom',
 					value: 'layerBottom'
-				}]
+				}],
+				editorPaneWidth: 0,
 			}
 		},
 		computed: {
@@ -106,10 +111,17 @@
 				'activeElementIndex',
 				'activeElement',
         'activePage'
-			])
+			]),
+			getMenuOptionsPositionStyle(){
+				let both = (this.editorPaneWidth - this.projectData.width * this.scale) / 2;
+				let right = both < 60 ? 16 : both;
+				return {
+					right: right + 'px'
+				}
+      }
 		},
 		mounted() {
-
+      this.editorPaneWidth = this.$refs.editorPane.offsetHeight;
 		},
 		methods: {
 			/**
@@ -225,8 +237,8 @@
 
   .page-wrapper-menu-operation {
     position: absolute;
-    right: -80px;
-    top: 0;
+    right: 0;
+    top: 45px;
     width: 0;
     background: white;
     color: #333;

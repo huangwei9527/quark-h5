@@ -8,7 +8,7 @@
     "dev": "npm run dev-client",
     "build-client": "vue-cli-service build",
     "start": "pm2 start server/app.js",
-    "lib:h5-swiper": "vue-cli-service build --target lib --name h5-swiper --dest server/public/engine_libs/h5-swiper engine-template/engine-h5-swiper/index.js"
+    "lib:h5-swiper": "vue-cli-service build --target lib --name page-engine --dest server/public/engine_libs/h5-swiper engine-template/engine-h5-swiper/index.js"
   },
   "dependencies": {
     "ali-oss": "^6.1.1",
@@ -27,7 +27,9 @@
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.6.3",
     "redis": "^3.0.2",
+    "swiper": "^6.3.5",
     "vue": "^2.6.10",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-clipboard2": "^0.3.1",
     "vue-cropper": "^0.4.9",
     "vue-router": "^3.0.3",

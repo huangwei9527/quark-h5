@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="/third-libs/animate.min.css">
   <link rel="stylesheet" href="/third-libs/swiper.min.css">
   <script src="/third-libs/swiper.min.js"></script>
-
   <!--引入模板-->
   <script src="/engine_libs/h5-swiper/page-engine.umd.js"></script>
   <link rel="stylesheet" href="/engine_libs/h5-swiper/page-engine.css">
@@ -30,11 +29,6 @@
       width: 100%;
       height: 100%;
     }
-    .swiper-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-    }
   </style>
   <script>
 	  window._pageData = <%- JSON.stringify(pageData) %>
@@ -44,26 +38,11 @@
 <div id="app">
   <engine-h5-swiper  />
 </div>
-<script type="text/javascript">(function (w) {w.frontjsConfig = {token: "878e39b4ff1b6f0984e3113216eee917", behaviour: 3, optimisedForSPA: true, useHistory: true};w.frontjsTmpData = {r:[],e:[],l:[]};w.frontjsTmpCollector = function (ev) {(ev.message ? window.frontjsTmpData.e : window.frontjsTmpData.r).push([new Date().getTime(), ev])};w.FrontJS = {addEventListener: function (t, f) {w.frontjsTmpData.l.push([t, f]);return f;},removeEventListener: function (t, f) {for (var i = 0; i < w.frontjsTmpData.l.length; i++) {t === w.frontjsTmpData.l[i][0] && f === w.frontjsTmpData.l[i][1] && w.frontjsTmpData.l.splice(i, 1);}return f;}};w.document.addEventListener("error", w.frontjsTmpCollector, true);w.addEventListener("error", w.frontjsTmpCollector, true);w.addEventListener("load", function () {var n = w.document.createElement("script");n.src = "https://static.frontjs.com/dist/current/tracker.min.js"; w.document.body.appendChild(n);}, true);})(window);</script>
 <script>
   new Vue({
 	  el:"#app"
   })
 </script>
-<script>
-  // 判断翻页类型
-  var direction = _pageData.flipType === 0 ? 'vertical' : 'horizontal'
-  var showSlideNumber = !!_pageData.slideNumber
-	new Swiper('.swiper-container', {
-		direction: direction,
-		loop: false,
-		pagination: showSlideNumber ? { el: '.swiper-pagination'} : {},
-		scrollbar: {
-			el: '.swiper-scrollbar',
-		},
-	});
-</script>
-
 <script>
 	eval(window._pageData.script);
 </script>
