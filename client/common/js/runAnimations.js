@@ -16,7 +16,7 @@ export default async function runAnimation($el, animationList = [], isDebug , ca
 			$el.style.animationFillMode =  'both'
 			let resolveFn = function(){
 				$el.removeEventListener('animationend', resolveFn, false);
-				$el.addEventListener('animationcancel', resolveFn, false);
+				$el.removeEventListener('animationcancel', resolveFn, false);
 				resolve()
 			}
 			$el.addEventListener('animationend', resolveFn, false)
