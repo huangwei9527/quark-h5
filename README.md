@@ -267,7 +267,8 @@ export default [
 **服务端具体接口实现就不详细介绍了，就是对页面的增删改查，和用户的登录注册难度不大**
 
 ## 本地开发
-环境准备：mongodb （配置文件在/server/config/index.js）
+环境准备：mongodb （配置文件在/server/config/index.js） ⭐⭐⭐⭐⭐(重要)
+
 ### 启动前端
 ```
 npm run dev-client
@@ -285,7 +286,8 @@ npm run lib:h5-swiper
 ```
 
 ## 本地部署
-环境准备：mongodb （配置文件在/server/config/index.js）
+环境准备：mongodb （配置文件在/server/config/index.js） ⭐⭐⭐⭐⭐(重要)
+
 需要全局安装pm2 
 ```
 npm install pm2 -g
