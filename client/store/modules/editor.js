@@ -414,11 +414,11 @@ const mutations = {
 				item.commonStyle.zIndex++
 			}
 			// 目标元素zIndex 以上的都减一
-			if(type === 'layerTop' && item.commonStyle.zIndex > itemZIndex){
+			if((type === 'layerTop' || type === 'set0') && item.commonStyle.zIndex > itemZIndex){
 				item.commonStyle.zIndex--
 			}
 			// 目标元素zIndex以下的都加一
-			if((type === 'layerBottom' || type === 'set0') && item.commonStyle.zIndex < itemZIndex){
+			if(type === 'layerBottom' && item.commonStyle.zIndex < itemZIndex){
 				item.commonStyle.zIndex++
 			}
 		})
