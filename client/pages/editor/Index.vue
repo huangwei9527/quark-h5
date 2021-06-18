@@ -149,6 +149,8 @@
 					this.$store.dispatch('setPrjectData', {
 						...res.body
 					})
+          this.$store.dispatch('clearHistoryCache')
+          this.$store.dispatch('addHistoryCache')
 				}).catch(() => {
 					this.loading = false;
 				})
