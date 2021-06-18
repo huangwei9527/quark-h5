@@ -260,6 +260,9 @@ const actions = {
 	addHistoryCache({commit}){
 		commit('addHistoryCache')
 	},
+	clearHistoryCache({commit}) {
+		commit('clearHistoryCache')
+	},
 	editorUndo({commit, state}){
 		if(!getters.canUndo(state)){
 			return;
@@ -441,6 +444,11 @@ const mutations = {
 		// 限制undo 纪录步数，最多支持100步操作undo
 		state.historyCache.splice(100)
 		state.currentHistoryIndex++
+	},
+
+	clearHistoryCache(state) {
+		state.historyCache = []
+		state.currentHistoryIndex = -1
 	},
 	/**
 	 *
