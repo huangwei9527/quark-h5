@@ -304,7 +304,7 @@ npm run start
 ## 交流群(948547409)
 
 ### License
-Apache License 2.0
+MIT
 
 
 #### 捐赠作者
