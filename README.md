@@ -4,12 +4,14 @@
 演示地址：[传送门](http://47.104.247.183:4000/)
 
 掘金文章：[Vue + Koa从零打造一个H5页面可视化编辑器——Quark-h5](https://juejin.im/post/6844903992426758152)
+
 &&
+
 [基于Koa2打造属于自己的MVC框架](https://juejin.cn/post/6895715094257205261)
 
 **编辑器预览：**
 
-![](https://user-gold-cdn.xitu.io/2019/11/10/16e55daeaa08bd25?w=1733&h=816&f=gif&s=4898484)
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14bbfe2bc077432090fa9eff2596ca94~tplv-k3u1fbpfcp-watermark.awebp)
 
 ## 技术栈
 **前端：**<br/>
