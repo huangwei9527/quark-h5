@@ -24,6 +24,10 @@
 **服务端：**<br/>
 `koa`：后端语言采用nodejs，koa文档和学习资料也比较多，express原班人马打造，这个正合适。<br/>
 `mongodb`：一个基于分布式文件存储的数据库，比较灵活。<br/>
+
+## 环境
+node 14
+
 ## 阅读前准备
 1、了解vue技术栈开发<br/>
 2、了解koa<br/>
@@ -309,9 +313,3 @@ npm run start
 MIT
 
 
-#### 捐赠作者
-
-如果你觉得这个项目对你有用或者有所启发，可以请作者喝杯果汁：（黄维）
-
-
-![d023c7f64e8d9f8b899b561f31a7463.jpg](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/250df22fcc9c48168f66333dfbfcfce8~tplv-k3u1fbpfcp-watermark.image??imageMogr2/auto-orient/strip%7CimageView2/2/w/200)
