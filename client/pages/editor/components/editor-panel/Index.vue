@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-pane" @click="handleClickCanvas" @keyup.esc="handleKeyup" ref="editorPane">
+  <div class="editor-pane" @click="handleClickCanvas" tabindex="0" @keyup.esc.delete="handleKeyup" ref="editorPane">
     <div class="editor-pane-inner">
       <div class="editor-main" :style="{transform: 'scale('+scale+')', width: projectData.width + 'px', height: projectData.height + 'px'}">
         <div class="page-preview-wrapper" ref="canvas-panel" id="canvas-panel" :style="getCommonStyle(activePage.commonStyle)">
@@ -163,7 +163,11 @@
 			 * @param e
 			 */
 			handleKeyup(e) {
-				console.log(1111, e);
+        if (e.key === 'Escape') {
+          this.$emit('cancel')
+        }else if (e.key === 'Delete') {
+          this.$store.dispatch('elementCommand', 'delete')
+        }
 			},
 			/**
 			 * 提供截屏作为项目主图

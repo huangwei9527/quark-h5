@@ -27,7 +27,7 @@
                 @publish="publishFn"
                 @save="saveFn"/>
       </div>
-      <editorPan :scale.sync="canvasConfig.scale"/>
+      <editorPan :scale.sync="canvasConfig.scale" @cancel="cancelFn"/>
     </div>
     <!--属性编辑区域-->
     <div class="el-attr-edit-wrapper scrollbar-wrapper">

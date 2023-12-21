@@ -46,10 +46,10 @@
 </script>
 
 <style lang="scss" scoped>
+.qk-image-carsousel,
 .image-carsousel-swiper,
 .image-carsousel-slide,
 .image-carsousel-image{
-  display: block;
   width: 100%;
   height: 100%;
 }
